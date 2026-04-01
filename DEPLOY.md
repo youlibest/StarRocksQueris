@@ -284,8 +284,6 @@ systemctl restart starrocks-queris
 # 查看进程
 ps aux | grep StarRocksQueris
 
-# 查看端口（日志服务端口 7890）
-netstat -tlnp | grep 7890
 ```
 
 ### 2. 查看日志
