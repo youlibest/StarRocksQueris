@@ -2,8 +2,8 @@ configdb:
   Host: 127.0.0.1
   Port: 3306
   User: root
-  Pass: "**************1."
-  Db: srquery
+  Pass: "**************"
+  Db: srqueis
   Schema:
     App: starrocks_information_slowconfig
     Connect: starrocks_information_connections
@@ -14,7 +14,7 @@ mode:
   cronsyntax: '*/1 * * * *'
 
 logger:
-  LogPath: /u/users/svccndlopsns/chengken/log/StarRocksSupport
+  LogPath: /var/log/StarRocksQueris/logs
   LogLevel: 0
   MaxSize: 0
   MaxBackups: 0
