@@ -1,0 +1,171 @@
+# StarRocksQueris 规则配置文件
+# 此文件用于配置慢查询、集群连接、告警等相关参数
+# 修改此文件后需要重启服务生效
+
+# ============================================
+# 慢查询规则配置
+# ============================================
+slow_query:
+  # 慢查询告警超时时间（秒），超过此时长的查询将触发告警
+  alert_timeout_seconds: 6
+
+  # 慢查询查杀时间（秒），超过此时长的查询将被自动查杀
+  kill_timeout_seconds: 1500
+
+  # 慢查询并发度限制，并发语句超过该值将触发告警
+  concurrency_limit: 80
+
+  # 全表扫描行数限制（行），超过该值将触发查杀，默认2亿
+  full_scan_rows_limit: 200000000
+
+  # Catalog扫描行数限制（行），超过该值将触发查杀，默认1亿
+  catalog_scan_rows_limit: 100000000
+
+  # BE内存限制（GB），单个BE查询消耗内存超过该值将触发查杀，默认200GB
+  be_memory_limit_gb: 200
+
+  # 扫描行数限制（行），超过该值将触发查杀，默认100亿
+  scan_rows_limit: 10000000000
+
+  # 扫描字节限制（TB），超过该值将触发查杀，默认5TB
+  scan_bytes_limit_tb: 5
+
+  # 资源组CPU核心限制
+  resource_group_cpu_core: 10
+
+  # 资源组内存限制（GB）
+  resource_group_mem_gb: 50
+
+  # 资源组并发度限制
+  resource_group_concurrency: 3
+
+  # 飞书代理地址（如果企业需要通过代理访问飞书）
+  feishu_proxy: ""
+
+  # 企业邮箱后缀，如 @company.com
+  email_suffix: ""
+
+  # 慢查询记录落表端口（Stream Load默认8030）
+  data_registration_port: 8030
+
+# ============================================
+# 集群连接规则配置
+# ============================================
+cluster_connection:
+  # 默认FE端口
+  default_fe_port: 9030
+
+  # License过期提醒天数（企业级）
+  license_expire_remind_days: 30
+
+  # License检查开关，0=关闭，1=开启
+  license_check_switch: 0
+
+# ============================================
+# StarRocks 集群连接配置列表
+# 启动时会自动将这些配置写入数据库
+# ============================================
+clusters:
+  # 集群1配置示例
+  - app: "test-cluster"           # 集群名称（英文，唯一标识）
+    nickname: "测试集群"           # 集群别名（中文）
+    alias: "test"                 # 简称
+    feip: "172.31.11.137"         # FE IP地址或域名
+    user: "root"                  # 用户名
+    password: "Sr@202407"     # 密码
+    feport: 9030                  # FE端口（可选，默认使用 cluster_connection.default_fe_port）
+    address: ""                   # Manager地址（企业版，可选）
+    expire: 30                    # License过期提醒天数（可选）
+    status: 0                     # License检查开关 0=关闭 1=开启（可选）
+    fe_log_path: ""               # FE日志路径（可选）
+    be_log_path: ""               # BE日志路径（可选）
+
+  # 集群2配置示例（如有多个集群，取消注释并修改）
+  # - app: "test-cluster"
+  #   nickname: "测试集群"
+  #   alias: "test"
+  #   feip: "192.168.1.101"
+  #   user: "root"
+  #   password: "test-password"
+  #   feport: 9030
+
+# ============================================
+# 短查询规则配置
+# ============================================
+short_query:
+  # 默认初始化推送，0=不需要，1=需要
+  default_init_push: 1
+
+  # 默认状态
+  default_status: 0
+
+  # 默认CPU核心数
+  default_core: 4
+
+  # 默认内存（GB）
+  default_memory_gb: 8
+
+# ============================================
+# 飞书机器人规则配置
+# ============================================
+lark_robot:
+  # 默认状态，0=关闭，1=开启
+  default_status: 0
+
+# ============================================
+# 企业微信应用配置（使用企业ID+AgentId+Secret方式）
+# ============================================
+wecom_app:
+  # 默认状态，0=关闭，1=开启
+  default_status: 1
+
+  # 企业ID (CorpID)
+  corp_id: "wx7d3e81e155049ca3"
+
+  # 应用ID (AgentId)
+  agent_id: "1000027"
+
+  # 应用密钥 (Secret)
+  secret: "DvpGuNYmQEIxn-DBzY9Q7_pzEATOE8b3na3WOuijZ7s"
+
+  # 消息类型：text(文本), markdown(markdown格式)
+  msg_type: "markdown"
+
+  # 是否@所有人
+  mention_all: false
+
+  # 需要@的成员账号列表（企业微信中的用户账号，如 zhangsan）
+  # 示例: ["zhangsan", "lisi"]
+  mentioned_user_list: []
+
+# ============================================
+# 机器人配置列表（启动时自动写入数据库）
+# ============================================
+robots:
+  # 飞书机器人配置
+  lark:
+    - type: "global"
+      key: "default"
+      robot: "your-feishu-webhook-key"
+      status: 0
+    - type: "cluster"
+      key: "test-cluster"
+      robot: "your-cluster-webhook-key"
+      status: 0
+
+  # 企业微信机器人配置
+  wecom:
+    - type: "global"
+      key: "default"
+      webhook_key: "your-wecom-webhook-key"
+      msg_type: "markdown"
+      mention_all: 0
+      mentioned_mobile_list: ""
+      status: 1
+    - type: "cluster"
+      key: "test-cluster"
+      webhook_key: "your-cluster-webhook-key"
+      msg_type: "markdown"
+      mention_all: 0
+      mentioned_mobile_list: ""
+      status: 1

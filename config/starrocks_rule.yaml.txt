@@ -1,0 +1,38 @@
+# 慢查询核心规则配置
+slow_query:
+  # 超时告警/查杀阈值
+  alert_timeout_seconds: 600        # 慢查询告警超时时间（原slow_query_time）
+  kill_timeout_seconds: 1500        # 慢查询查杀超时时间（原slow_query_ktime）
+  concurrency_limit: 80             # 慢查询并发告警阈值（原slow_query_concurrencylimit）
+  # 扫描/内存阈值
+  full_scan_rows_limit: 200000000   # 全表扫描行数阈值（原slow_query_frontend_fullscan_num）
+  catalog_scan_rows_limit: 100000000 # INSERT CATALOG扫描行数阈值
+  be_memory_limit_gb: 200           # 单BE内存消耗阈值（GB）
+  scan_rows_limit: 10000000000      # 扫描行数阈值（百亿）
+  scan_bytes_limit_tb: 5            # 扫描字节阈值（TB）
+  # 资源隔离限制
+  resource_group_cpu_core: 10       # 资源组CPU核心限制
+  resource_group_mem_gb: 50         # 资源组内存限制（GB）
+  resource_group_concurrency: 3     # 资源组并发限制
+  # 告警推送
+  feishu_proxy: ""                  # 飞书代理地址
+  email_suffix: "@xxx.com"          # 企业邮箱后缀
+  # 数据落表配置
+  data_registration_port: 8030      # Stream Load端口
+
+# 集群连接配置
+cluster_connection: 172.31.11.137
+  default_fe_port: 9030             # FE默认端口
+  license_expire_remind_days: 30    # License过期提醒天数（默认30天）
+  license_check_switch: 0           # License检测开关（0=关，1=开）
+
+# 短查询资源保障配置
+short_query:
+  default_init_push: 0              # 初始化是否推送（0=否，1=是）
+  default_status: 1                 # 短查询配置默认状态
+  default_core: 8                   # 默认CPU核心
+  default_memory_gb: 16             # 默认内存（GB）
+
+# 飞书机器人配置
+lark_robot:
+  default_status: 0                 # 机器人默认开关（0=关，1=开）

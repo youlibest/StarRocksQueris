@@ -1,0 +1,25 @@
+configdb:
+  Host: 127.0.0.1
+  Port: 3306
+  User: root
+  Pass: "**************1."
+  Db: srquery
+  Schema:
+    App: starrocks_information_slowconfig
+    Connect: starrocks_information_connections
+    Robot: starrocks_information_larkrobot
+    WeComRobot: starrocks_information_wecomrobot
+
+mode:
+  cronsyntax: '*/1 * * * *'
+
+logger:
+  LogPath: /u/users/svccndlopsns/chengken/log/StarRocksSupport
+  LogLevel: 0
+  MaxSize: 0
+  MaxBackups: 0
+  MaxAge: 0
+  Compress: false
+  JsonFormat: false
+  ShowLine: true
+  LogInConsole: true
