@@ -70,9 +70,9 @@ clusters:
   - app: "test-cluster"           # 集群名称（英文，唯一标识）
     nickname: "测试集群"           # 集群别名（中文）
     alias: "test"                 # 简称
-    feip: "172.31.11.137"         # FE IP地址或域名
+    feip: "192.0.0.0"         # FE IP地址或域名
     user: "root"                  # 用户名
-    password: "Sr@202407"     # 密码
+    password: "xxxxxx"     # 密码
     feport: 9030                  # FE端口（可选，默认使用 cluster_connection.default_fe_port）
     address: ""                   # Manager地址（企业版，可选）
     expire: 30                    # License过期提醒天数（可选）
@@ -120,13 +120,13 @@ wecom_app:
   default_status: 1
 
   # 企业ID (CorpID)
-  corp_id: "wx7d3e81e155049ca3"
+  corp_id: ""
 
   # 应用ID (AgentId)
-  agent_id: "1000027"
+  agent_id: ""
 
   # 应用密钥 (Secret)
-  secret: "DvpGuNYmQEIxn-DBzY9Q7_pzEATOE8b3na3WOuijZ7s"
+  secret: ""
 
   # 消息类型：text(文本), markdown(markdown格式)
   msg_type: "markdown"
